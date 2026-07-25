@@ -133,7 +133,8 @@ export function LabelSheetPreview({ pages, config }: LabelSheetPreviewProps) {
       style.id = id;
       document.head.appendChild(style);
     }
-    style.textContent = `@media print { @page { size: ${paper.widthMm}mm ${paper.heightMm}mm; margin: 0; } }`;
+    const orientation = paper.heightMm >= paper.widthMm ? 'portrait' : 'landscape';
+    style.textContent = `@media print { @page { size: ${paper.widthMm}mm ${paper.heightMm}mm ${orientation}; margin: 0; } }`;
     return () => {
       style?.remove();
     };
